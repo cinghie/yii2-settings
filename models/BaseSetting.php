@@ -12,8 +12,9 @@ use yii\helpers\Json;
 use yii\db\Expression;
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
-use yii\base\InvalidParamException;
+use yii\base\InvalidArgumentException;
 use yii\behaviors\TimestampBehavior;
+use yii\helpers\VarDumper;
 
 /**
  * This is the model class for table "settings".
@@ -110,19 +111,20 @@ class BaseSetting extends ActiveRecord implements SettingInterface
             $model = new static();
             $model->active = 1;
         }
+
         $model->section = $section;
         $model->key = $key;
-        $model->value = strval($value);
+        $model->value = $value;
 
         if ($type !== null) {
             $model->type = $type;
         } else {
             $t = gettype($value);
-            if ($t == 'string') {
+            if ($t === 'object' && !empty($value)) {
                 $error = false;
                 try {
                     Json::decode($value);
-                } catch (InvalidParamException $e) {
+                } catch (InvalidArgumentException $e) {
                     $error = true;
                 }
                 if (!$error) {
