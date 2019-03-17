@@ -9,6 +9,7 @@
 namespace pheme\settings;
 
 use Yii;
+use yii\i18n\PhpMessageSource;
 
 /**
  * @author Aris Karageorgos <aris@phe.me>
@@ -46,7 +47,7 @@ class Module extends \yii\base\Module
     protected function registerTranslations()
     {
         Yii::$app->i18n->translations['extensions/yii2-settings/*'] = [
-            'class' => 'yii\i18n\PhpMessageSource',
+            'class' => PhpMessageSource::class,
             'sourceLanguage' => $this->sourceLanguage,
             'basePath' => '@vendor/pheme/yii2-settings/messages',
             'fileMap' => [

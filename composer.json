@@ -16,7 +16,8 @@
     ],
     "require": {
         "yiisoft/yii2": ">=2.0.6",
-        "pheme/yii2-toggle-column": "@dev"
+        "pheme/yii2-toggle-column": "@dev",
+        "pheme/yii2-settings": "@dev"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0"
